@@ -71,3 +71,4 @@ TrafficLightSimulation/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 # Temporary auto-generated Android Assets
 TrafficLightSimulation/[Aa]ssets/[Ss]treamingAssets/aa.meta
 TrafficLightSimulation/[Aa]ssets/[Ss]treamingAssets/aa/*
+TrafficLightSimulation/Assets/Model/yolov8n.onnx

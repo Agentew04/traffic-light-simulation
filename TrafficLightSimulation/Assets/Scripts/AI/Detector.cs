@@ -73,6 +73,9 @@ public class Detector : MonoBehaviour
             case TextureProviderType.ProviderType.Video:
                 provider = new VideoTextureProvider(textureProvider as VideoTextureProvider, width, height);
                 break;
+            case TextureProviderType.ProviderType.Camera:
+                provider = new CameraTextureProvider(textureProvider as CameraTextureProvider, width, height);
+                break;
             default:
                 throw new InvalidEnumArgumentException();
         }

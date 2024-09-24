@@ -45,19 +45,24 @@ namespace Assets.Scripts.TextureProviders
         {
             providers = new TextureProvider[]{ 
                 RuntimeHelpers.GetUninitializedObject(typeof(WebCamTextureProvider)) as WebCamTextureProvider,
-                RuntimeHelpers.GetUninitializedObject(typeof(VideoTextureProvider)) as VideoTextureProvider };
+                RuntimeHelpers.GetUninitializedObject(typeof(VideoTextureProvider)) as VideoTextureProvider,
+                RuntimeHelpers.GetUninitializedObject(typeof(CameraTextureProvider)) as VideoTextureProvider};
         }
 
         public enum ProviderType
         {
             WebCam,
-            Video
+            Video,
+            Camera
         }
 
         static public Type GetProviderType(ProviderType type)
         {
             foreach(var provider in providers)
             {
+                if(provider == null) {
+                    return typeof(CameraTextureProvider);
+                }
                 if (provider.TypeEnum() == type)
                     return provider.GetType();
             }

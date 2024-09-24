@@ -2,11 +2,15 @@
 using Assets.Scripts.TextureProviders;
 using NN;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 using Unity.Barracuda;
+using Unity.Properties;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -38,6 +42,9 @@ public class Detector : MonoBehaviour
 
     YOLOv8 yolo;
 
+    private Task detectionTask;
+    private CancellationTokenSource cts;
+
     private void OnEnable()
     {
         nn = new NNHandler(ModelFile);
@@ -45,16 +52,34 @@ public class Detector : MonoBehaviour
 
         textureProvider = GetTextureProvider(nn.model);
         textureProvider.Start();
+        cts = new();
+        Debug.Log("Starting task");
+        detectionTask = Task.Run(YoloRun, cts.Token);
     }
 
-    private void Update()
-    {
-        YOLOv8OutputReader.DiscardThreshold = MinBoxConfidence;
-        Texture2D texture = GetNextTexture();
+    private void OnDestroy() {
+        Debug.Log("Cancelling task");
+        cts.Cancel();
+    }
 
-        var boxes = yolo.Run(texture);
-        DrawResults(boxes, texture);
-        ImageUI.texture = texture;
+    private async Task YoloRun() {
+        Debug.Log("task started");
+        while (!cts.Token.IsCancellationRequested) {
+            YOLOv8OutputReader.DiscardThreshold = MinBoxConfidence;
+            Debug.Log("Getting texture");
+            Texture2D texture = GetNextTexture();
+            Debug.Log("Texture got");
+
+            Debug.Log("running");
+            var boxes = yolo.Run(texture);
+            Debug.Log("ran");
+            Debug.Log("drawing results");
+            DrawResults(boxes, texture);
+            Debug.Log("Results drawn");
+            ImageUI.texture = texture;
+            await Task.Delay(1);
+        }
+        Debug.Log("task ended");
     }
 
     protected TextureProvider GetTextureProvider(Model model)
@@ -84,6 +109,7 @@ public class Detector : MonoBehaviour
 
     protected Texture2D GetNextTexture()
     {
+        Debug.Log("getting next texture 2");
         return textureProvider.GetTexture();
     }
 

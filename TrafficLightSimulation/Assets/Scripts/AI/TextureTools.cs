@@ -9,13 +9,21 @@ class TextureTools
 {
     public static Texture2D ResizeAndCropToCenter(Texture texture, ref Texture2D result, int width, int height)
     {
+        Debug.Log("resizing 2");
         float widthRatio = width / (float)texture.width;
+        Debug.Log("resizing 3");
         float heightRatio = height / (float)texture.height;
+        Debug.Log("resizing 4");
         float ratio = widthRatio > heightRatio ? widthRatio : heightRatio;
+        Debug.Log("resizing 5");
 
         Vector2Int renderTexturetSize = new((int)(texture.width * ratio), (int)(texture.height * ratio));
+        Debug.Log("getting temp");
         RenderTexture renderTexture = RenderTexture.GetTemporary(renderTexturetSize.x, renderTexturetSize.y);
+        Debug.Log("got temp");
+        Debug.Log("blitting");
         Graphics.Blit(texture, renderTexture);
+        Debug.Log("blitted");
         
         RenderTexture previousRenderTexture = RenderTexture.active;
         RenderTexture.active = renderTexture;

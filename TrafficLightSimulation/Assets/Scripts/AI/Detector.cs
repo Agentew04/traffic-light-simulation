@@ -50,7 +50,7 @@ public class Detector : MonoBehaviour
     private void OnEnable()
     {
         nn = new NNHandler(ModelFile);
-        //yolo = new YOLOv8Segmentation(nn);
+        yolo = new YOLOv8Segmentation(nn);
 
 
         textureProvider = GetTextureProvider(nn.model);
@@ -60,6 +60,17 @@ public class Detector : MonoBehaviour
         _ = StartCoroutine(YoloRun());
         // detectionTask = Task.Run(YoloRun, cts.Token);
     }
+
+    //private void Update()
+    //{
+    //    YOLOv8OutputReader.DiscardThreshold = MinBoxConfidence;
+    //    Texture2D texture = GetNextTexture();
+
+    //    var boxes = yolo.Run(texture);
+
+    //    DrawResults(boxes, texture);
+    //    ImageUI.texture = texture;
+    //}
 
     private IEnumerator YoloRun() {
         Debug.Log("task started");

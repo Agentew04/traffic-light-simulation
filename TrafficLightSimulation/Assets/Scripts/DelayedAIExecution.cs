@@ -47,7 +47,8 @@ public class DelayedAIExecution : MonoBehaviour
         var inputTensor = new Tensor(currentTexture);
 
         var output = nn.worker.Execute(inputTensor).PeekOutput();
-        yield return new WaitForCompletion(output);
+        //yield return new WaitForCompletion(output);
+        yield return new WaitForSeconds(1f);
         inputTensor.tensorOnDevice.Dispose();
         var outs = PeekOutputs().ToArray();
         Tensor boxesOutput = outs[0];

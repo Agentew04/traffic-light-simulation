@@ -47,6 +47,8 @@ public class Detector : MonoBehaviour
     private Task detectionTask;
     private CancellationTokenSource cts;
 
+    public List<ResultBox> publicResultBoxes = new();
+
     private void OnEnable()
     {
         nn = new NNHandler(ModelFile);
@@ -137,6 +139,7 @@ public class Detector : MonoBehaviour
 
     protected void DrawResults(IEnumerable<ResultBox> results, Texture2D img)
     {
+        publicResultBoxes.Clear();
         results.ForEach(box => DrawBox(box, img));
     }
 
@@ -144,7 +147,11 @@ public class Detector : MonoBehaviour
     {
         Color boxColor = colorArray[box.bestClassIndex % colorArray.Length];
         int boxWidth = (int)(box.score / MinBoxConfidence);
-        TextureTools.DrawRectOutline(img, box.rect, boxColor, boxWidth, rectIsNormalized: false, revertY: true);
+        if ((box.bestClassIndex % colorArray.Length) == 2 && box.rect.x + box.rect.width < 320)
+        {
+            TextureTools.DrawRectOutline(img, box.rect, boxColor, boxWidth, rectIsNormalized: false, revertY: true);
+            publicResultBoxes.Add(box);
+        }
     }
 
     private void OnValidate()

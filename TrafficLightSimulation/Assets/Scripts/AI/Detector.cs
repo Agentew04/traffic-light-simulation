@@ -5,16 +5,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Unity.Barracuda;
 using Unity.Properties;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Detector : MonoBehaviour
 {
@@ -47,7 +50,9 @@ public class Detector : MonoBehaviour
     private Task detectionTask;
     private CancellationTokenSource cts;
 
-    public List<ResultBox> publicResultBoxes = new();
+    public List<ResultBox> PublicResultBoxes { get; private set; } = new();
+
+    private const int CAR_CLASS = 2;
 
     private void OnEnable()
     {
@@ -58,45 +63,37 @@ public class Detector : MonoBehaviour
         textureProvider = GetTextureProvider(nn.model);
         textureProvider.Start();
         cts = new();
-        Debug.Log("Starting task");
         _ = StartCoroutine(YoloRun());
-        // detectionTask = Task.Run(YoloRun, cts.Token);
     }
 
-    //private void Update()
-    //{
-    //    YOLOv8OutputReader.DiscardThreshold = MinBoxConfidence;
-    //    Texture2D texture = GetNextTexture();
-
-    //    var boxes = yolo.Run(texture);
-
-    //    DrawResults(boxes, texture);
-    //    ImageUI.texture = texture;
-    //}
-
     private IEnumerator YoloRun() {
-        Debug.Log("task started");
         while (!cts.Token.IsCancellationRequested) {
             YOLOv8OutputReader.DiscardThreshold = MinBoxConfidence;
             Texture2D texture = GetNextTexture();
 
             delayedExecution.StartExecution(texture);
-            //Task<List<ResultBox>> t = Task.Run(() => yolo.Run(texture) );
-            //while (!t.IsCompleted) {
-            //    yield return null;
-            //}
-            //var boxes = t.Result;
+            
             bool canLoopAgain = false;
             delayedExecution.OnFinished += (boxes) => {
-                DrawResults(boxes, texture);
-                ImageUI.texture = texture;
+                PublicResultBoxes = boxes
+                    .Where(box => (box.bestClassIndex % colorArray.Length) == CAR_CLASS)
+                    .Where(box => box.rect.x + box.rect.width < 320)
+                    .Select(box => {
+                        // a IA gera caixas com coords 0-640. Queremos caixas 16:9
+                        Rect rect = box.rect;
+                        rect.xMin = box.rect.xMin.Remap(new Vector2(0, 640), new Vector2(0, 1280));
+                        rect.xMax = box.rect.xMin.Remap(new Vector2(0, 640), new Vector2(0, 1280));
+                        rect.yMin = box.rect.yMin.Remap(new Vector2(0, 640), new Vector2(0, 720));
+                        rect.yMax = box.rect.yMin.Remap(new Vector2(0, 640), new Vector2(0, 720));
+                        return new ResultBox(rect, box.score, box.bestClassIndex);
+                    })
+                    .ToList();
                 canLoopAgain = true;
             };
             while (!canLoopAgain) {
-                yield return null;
+                yield return new WaitForNextFrameUnit();
             }
         }
-        Debug.Log("task ended");
     }
 
     protected TextureProvider GetTextureProvider(Model model)
@@ -131,7 +128,6 @@ public class Detector : MonoBehaviour
 
     void OnDisable()
     {
-        Debug.Log("Cancelling task");
         cts.Cancel();
         nn.Dispose();
         textureProvider.Stop();
@@ -139,8 +135,10 @@ public class Detector : MonoBehaviour
 
     protected void DrawResults(IEnumerable<ResultBox> results, Texture2D img)
     {
-        publicResultBoxes.Clear();
-        results.ForEach(box => DrawBox(box, img));
+        PublicResultBoxes.Clear();
+        results
+            .Where(box => (box.bestClassIndex % colorArray.Length) == 2)
+            .ForEach(box => DrawBox(box, img));
     }
 
     protected virtual void DrawBox(ResultBox box, Texture2D img)
@@ -149,8 +147,8 @@ public class Detector : MonoBehaviour
         int boxWidth = (int)(box.score / MinBoxConfidence);
         if ((box.bestClassIndex % colorArray.Length) == 2 && box.rect.x + box.rect.width < 320)
         {
-            TextureTools.DrawRectOutline(img, box.rect, boxColor, boxWidth, rectIsNormalized: false, revertY: true);
-            publicResultBoxes.Add(box);
+            //TextureTools.DrawRectOutline(img, box.rect, boxColor, boxWidth, rectIsNormalized: false, revertY: true);
+            PublicResultBoxes.Add(box);
         }
     }
 

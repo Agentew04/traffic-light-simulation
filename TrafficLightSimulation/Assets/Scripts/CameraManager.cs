@@ -69,5 +69,8 @@ public class CameraManager : MonoBehaviour
         if(cameras.Count != cameraPreviews.Count) {
             Debug.LogWarning($"Esperava mesma quantidade de RenderTextures e Previeww Images!");
         }
+        for (int i = 0; i < cameras.Count; i++) {
+            cameraPreviews[i].texture = cameras[i];
+        }
     }
 }

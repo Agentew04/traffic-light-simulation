@@ -42,8 +42,6 @@ public class DelayedAIExecution : MonoBehaviour
 
     private IEnumerator Execute() {
         System.Diagnostics.Stopwatch sw = new();
-        sw.Start();
-        Debug.Log("Starting");
         var inputTensor = new Tensor(currentTexture);
 
         var output = nn.worker.Execute(inputTensor).PeekOutput();
@@ -54,11 +52,6 @@ public class DelayedAIExecution : MonoBehaviour
         Tensor boxesOutput = outs[0];
         List<ResultBox> boxes = outputReader.ReadOutput(boxesOutput).ToList();
         boxes = DuplicatesSupressor.RemoveDuplicats(boxes);
-        foreach (var box in boxes) { 
-            Debug.Log(box);
-        }
-        sw.Stop();
-        //Debug.Log("Finished! Took: " + sw.Elapsed);
         OnFinished?.Invoke(boxes);
         isJobRunning = false;
     }

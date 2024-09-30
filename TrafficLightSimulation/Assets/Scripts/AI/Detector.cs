@@ -41,6 +41,8 @@ public class Detector : MonoBehaviour
     protected Color[] colorArray = new Color[] { Color.red, Color.green, Color.blue, Color.cyan, Color.magenta, Color.yellow };
 
     YOLOv8 yolo;
+    [SerializeField]
+    private DelayedAIExecution delayedExecution;
 
     private Task detectionTask;
     private CancellationTokenSource cts;
@@ -48,36 +50,38 @@ public class Detector : MonoBehaviour
     private void OnEnable()
     {
         nn = new NNHandler(ModelFile);
-        yolo = new YOLOv8Segmentation(nn);
+        //yolo = new YOLOv8Segmentation(nn);
+
 
         textureProvider = GetTextureProvider(nn.model);
         textureProvider.Start();
         cts = new();
         Debug.Log("Starting task");
-        detectionTask = Task.Run(YoloRun, cts.Token);
+        _ = StartCoroutine(YoloRun());
+        // detectionTask = Task.Run(YoloRun, cts.Token);
     }
 
-    private void OnDestroy() {
-        Debug.Log("Cancelling task");
-        cts.Cancel();
-    }
-
-    private async Task YoloRun() {
+    private IEnumerator YoloRun() {
         Debug.Log("task started");
         while (!cts.Token.IsCancellationRequested) {
             YOLOv8OutputReader.DiscardThreshold = MinBoxConfidence;
-            Debug.Log("Getting texture");
             Texture2D texture = GetNextTexture();
-            Debug.Log("Texture got");
 
-            Debug.Log("running");
-            var boxes = yolo.Run(texture);
-            Debug.Log("ran");
-            Debug.Log("drawing results");
-            DrawResults(boxes, texture);
-            Debug.Log("Results drawn");
-            ImageUI.texture = texture;
-            await Task.Delay(1);
+            delayedExecution.StartExecution(texture);
+            //Task<List<ResultBox>> t = Task.Run(() => yolo.Run(texture) );
+            //while (!t.IsCompleted) {
+            //    yield return null;
+            //}
+            //var boxes = t.Result;
+            bool canLoopAgain = false;
+            delayedExecution.OnFinished += (boxes) => {
+                DrawResults(boxes, texture);
+                ImageUI.texture = texture;
+                canLoopAgain = true;
+            };
+            while (!canLoopAgain) {
+                yield return null;
+            }
         }
         Debug.Log("task ended");
     }
@@ -109,12 +113,13 @@ public class Detector : MonoBehaviour
 
     protected Texture2D GetNextTexture()
     {
-        Debug.Log("getting next texture 2");
         return textureProvider.GetTexture();
     }
 
     void OnDisable()
     {
+        Debug.Log("Cancelling task");
+        cts.Cancel();
         nn.Dispose();
         textureProvider.Stop();
     }

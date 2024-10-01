@@ -60,14 +60,10 @@ public class BoxRenderer : MonoBehaviour
             lineWidth = boxWidth
         }).ToArray();
 
-        if(b.Length == 0) {
-            return;
+        ComputeBuffer boxBuffer = new(b.Length == 0 ? 1 : b.Length, sizeof(float) * 5);
+        if(b.Length != 0) {
+            boxBuffer.SetData(b);
         }
-
-        ComputeBuffer boxBuffer = new(b.Length, sizeof(float) * 5);
-        boxBuffer.SetData(b);
-
-        //inputTexture.enableRandomWrite = true;
 
         Debug.Log($"Drawing {b.Length} boxes. W/H({inputTexture.width}/{inputTexture.height})");
         foreach(var box in b) {
@@ -76,6 +72,7 @@ public class BoxRenderer : MonoBehaviour
         int kernelHandle = computeShader.FindKernel("CSMain");
         computeShader.SetTexture(kernelHandle, "Input", inputTexture);
         computeShader.SetTexture(kernelHandle, "Output", outputTexture);
+        computeShader.SetInt("boxCount", b.Length);
         computeShader.SetBuffer(kernelHandle, "Boxes", boxBuffer);
         computeShader.SetVector("boxColor", boxColor);
 

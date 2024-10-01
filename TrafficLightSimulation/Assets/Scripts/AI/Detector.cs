@@ -54,6 +54,8 @@ public class Detector : MonoBehaviour
 
     private const int CAR_CLASS = 2;
 
+    private const int LANE_SIZE = 320;
+
     private void OnEnable()
     {
         nn = new NNHandler(ModelFile);
@@ -77,7 +79,7 @@ public class Detector : MonoBehaviour
             delayedExecution.OnFinished += (boxes) => {
                 PublicResultBoxes = boxes
                     .Where(box => (box.bestClassIndex % colorArray.Length) == CAR_CLASS)
-                    .Where(box => box.rect.x + box.rect.width < 320)
+                    .Where(box => box.rect.x + box.rect.width < LANE_SIZE)
                     .Select(box => {
                         // a IA gera caixas com coords 0-640. Queremos caixas 16:9
                         Rect rect = box.rect;

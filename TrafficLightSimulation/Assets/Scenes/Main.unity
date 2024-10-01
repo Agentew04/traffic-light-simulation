@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 180384226}
   - component: {fileID: 180384228}
   - component: {fileID: 180384227}
+  - component: {fileID: 180384229}
   m_Layer: 0
   m_Name: poste1 (1)
   m_TagString: Untagged
@@ -554,6 +555,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180384225}
   m_Mesh: {fileID: 8740216404179703502, guid: baf78889661a8e9449a69e996dfd425a, type: 3}
+--- !u!114 &180384229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180384225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388ca1864f76ab341a83f59a9e0c0711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redLight: {fileID: 1059394345}
+  yellowLight: {fileID: 1881546362}
+  greenLight: {fileID: 159443955}
+  lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
+  yellowDelay: 1
+  open: 0
+  startclose: 0
+  close: 0
 --- !u!1001 &189925493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4942,6 +4963,7 @@ GameObject:
   - component: {fileID: 1702096369}
   - component: {fileID: 1702096371}
   - component: {fileID: 1702096370}
+  - component: {fileID: 1702096372}
   m_Layer: 0
   m_Name: poste1 (2)
   m_TagString: Untagged
@@ -5018,6 +5040,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702096368}
   m_Mesh: {fileID: 8740216404179703502, guid: baf78889661a8e9449a69e996dfd425a, type: 3}
+--- !u!114 &1702096372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702096368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388ca1864f76ab341a83f59a9e0c0711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redLight: {fileID: 951862793}
+  yellowLight: {fileID: 1619209092}
+  greenLight: {fileID: 1055984720}
+  lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
+  yellowDelay: 1
+  open: 0
+  startclose: 0
+  close: 0
 --- !u!1 &1738325580
 GameObject:
   m_ObjectHideFlags: 0
@@ -6301,6 +6343,7 @@ GameObject:
   - component: {fileID: 2068830046}
   - component: {fileID: 2068830048}
   - component: {fileID: 2068830047}
+  - component: {fileID: 2068830049}
   m_Layer: 0
   m_Name: poste1 (3)
   m_TagString: Untagged
@@ -6377,6 +6420,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068830045}
   m_Mesh: {fileID: 8740216404179703502, guid: baf78889661a8e9449a69e996dfd425a, type: 3}
+--- !u!114 &2068830049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068830045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388ca1864f76ab341a83f59a9e0c0711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redLight: {fileID: 1166067231}
+  yellowLight: {fileID: 432598160}
+  greenLight: {fileID: 1828538074}
+  lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
+  yellowDelay: 1
+  open: 0
+  startclose: 0
+  close: 0
 --- !u!1 &2069550906
 GameObject:
   m_ObjectHideFlags: 0
@@ -6868,6 +6931,7 @@ GameObject:
   - component: {fileID: 4542932065792960190}
   - component: {fileID: 2570782639148705258}
   - component: {fileID: 9205128033383149062}
+  - component: {fileID: 9205128033383149063}
   m_Layer: 0
   m_Name: poste1
   m_TagString: Untagged
@@ -6886,7 +6950,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -6895,7 +6959,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8271275731505943462, guid: baf78889661a8e9449a69e996dfd425a, type: 3}
+  - {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7104,7 +7168,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7113,7 +7177,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6103525743846994708, guid: baf78889661a8e9449a69e996dfd425a, type: 3}
+  - {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7955,7 +8019,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7964,7 +8028,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1631088464840237865, guid: baf78889661a8e9449a69e996dfd425a, type: 3}
+  - {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8047,6 +8111,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9205128033383149063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391901381456951827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388ca1864f76ab341a83f59a9e0c0711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redLight: {fileID: 8728549708931733926}
+  yellowLight: {fileID: 1424385013029993447}
+  greenLight: {fileID: 2854422343969258562}
+  lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
+  yellowDelay: 1
+  open: 0
+  startclose: 0
+  close: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField]
-    private List<RenderTexture> cameras = new();
+    private List<BoxRenderer> cameras = new();
 
     [SerializeField]
     private Camera defaultCamera;
@@ -51,7 +51,7 @@ public class CameraManager : MonoBehaviour
         }
         cameraFocusImage.gameObject.SetActive(true);
         //defaultCamera.gameObject.SetActive(false);
-        cameraFocusImage.texture = cameras[number - 1];
+        cameraFocusImage.texture = cameras[number - 1].OutputTexture;
         exitPreviewButton.gameObject.SetActive(true);
     }
 
@@ -70,7 +70,7 @@ public class CameraManager : MonoBehaviour
             Debug.LogWarning($"Esperava mesma quantidade de RenderTextures e Preview Images!");
         }
         for (int i = 0; i < cameras.Count; i++) {
-            cameraPreviews[i].texture = cameras[i];
+            cameraPreviews[i].texture = cameras[i].OutputTexture;
         }
     }
 }

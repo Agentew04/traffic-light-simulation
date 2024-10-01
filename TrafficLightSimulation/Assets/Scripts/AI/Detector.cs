@@ -83,7 +83,7 @@ public class Detector : MonoBehaviour
                     .Select(box => {
                         // a IA gera caixas com coords 0-640. Queremos caixas 16:9
                         Rect rect = box.rect;
-                        rect.xMin = box.rect.xMin.Remap(new Vector2(0, 640), new Vector2(0, 1280)) + box.rect.width*0.6f;
+                        rect.xMin = box.rect.xMin.Remap(new Vector2(0, 640), new Vector2(0, 1280)) + box.rect.width * 1.0f;
                         rect.xMax = box.rect.xMax.Remap(new Vector2(0, 640), new Vector2(0, 1280));
                         rect.yMin = box.rect.yMax.Remap(new Vector2(640, 0), new Vector2(0, 720));
                         rect.yMax = box.rect.yMin.Remap(new Vector2(640, 0), new Vector2(0, 720));

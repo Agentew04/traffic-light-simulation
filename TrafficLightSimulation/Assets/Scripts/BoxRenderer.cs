@@ -14,6 +14,9 @@ public class BoxRenderer : MonoBehaviour
     [SerializeField]
     private RenderTexture inputTexture;
 
+    private RenderTexture outputTexture;
+    public RenderTexture OutputTexture => outputTexture;
+
     [SerializeField]
     private ComputeShader computeShader;
 
@@ -35,7 +38,14 @@ public class BoxRenderer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // create a new texture with same dimensions as inputtexture
+        outputTexture = new RenderTexture(inputTexture);
+        outputTexture.enableRandomWrite = true;
+        outputTexture.Create();
+    }
+
+    private void OnDestroy() {
+        Destroy(outputTexture);
     }
 
     // Update is called once per frame
@@ -64,7 +74,8 @@ public class BoxRenderer : MonoBehaviour
             Debug.LogFormat($"Box: ({box.x1}; {box.y1}) ({box.x2}; {box.y2})");
         }
         int kernelHandle = computeShader.FindKernel("CSMain");
-        computeShader.SetTexture(kernelHandle, "Result", inputTexture);
+        computeShader.SetTexture(kernelHandle, "Input", inputTexture);
+        computeShader.SetTexture(kernelHandle, "Output", outputTexture);
         computeShader.SetBuffer(kernelHandle, "Boxes", boxBuffer);
         computeShader.SetVector("boxColor", boxColor);
 
@@ -73,7 +84,7 @@ public class BoxRenderer : MonoBehaviour
         computeShader.Dispatch(kernelHandle, threadGroupsX, threadGroupsY, 1);
         boxBuffer.Release();
 
-        destinationImage.texture = inputTexture;
+        destinationImage.texture = outputTexture;
         destinationImage.SetAllDirty();
     }
 }

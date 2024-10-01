@@ -13,7 +13,9 @@ StructuredBuffer<Box> Boxes;
 
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
-RWTexture2D<float4> Result;
+RWTexture2D<float4> Input;
+
+RWTexture2D<float4> Output;
 
 float4 boxColor;
 
@@ -25,6 +27,16 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     uint count;
     uint stride;
     Boxes.GetDimensions(count, stride);
+    bool achou = false;
+    //if (x > (1280.0*0.5))
+    //{
+    //    Output[id.xy] = float4(1, 0, 0, 1);
+    //}
+    //else
+    //{
+    //    Output[id.xy] = Input[id.xy];
+    //}
+    //return;
     for (int i = 0; i < count; i++)
     {
         // Fetch the box data
@@ -36,8 +48,12 @@ void CSMain (uint3 id : SV_DispatchThreadID)
              (y <= box.y1 + box.lineWidth || y >= box.y2 - box.lineWidth)))
         {
             // Set the color for the pixel on the box border (example: white)
-            Result[id.xy] = boxColor;
+            Output[id.xy] = boxColor;
+            achou = true;
         }
-        Result[id.xy] = float4(1, 0, 0, 1);
+    }
+    if (!achou)
+    {
+        Output[id.xy] = Input[id.xy];
     }
 }

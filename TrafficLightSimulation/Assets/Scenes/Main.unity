@@ -2267,7 +2267,7 @@ MonoBehaviour:
   computeShader: {fileID: 7200000, guid: 6f0820b7893c463479b908d887c35e15, type: 3}
   destinationImage: {fileID: 1852159475}
   boxColor: {r: 0, g: 0.22372484, b: 1, a: 1}
-  boxWidth: 2
+  boxWidth: 4
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

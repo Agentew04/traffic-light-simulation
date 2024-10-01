@@ -1334,6 +1334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  delay: 1
 --- !u!114 &418997837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2250,6 +2251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  delay: 1
 --- !u!114 &698552259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2828,6 +2830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  delay: 1
 --- !u!114 &805181313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4113,7 +4116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7976235026089625740, guid: 429d474b03dd5954fb668c086b8d87e9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40.46
+      value: -41.19
       objectReference: {fileID: 0}
     - target: {fileID: 7976235026089625740, guid: 429d474b03dd5954fb668c086b8d87e9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4746,6 +4749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  delay: 1
 --- !u!114 &1613081400
 MonoBehaviour:
   m_ObjectHideFlags: 0

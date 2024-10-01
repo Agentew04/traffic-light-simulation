@@ -81,10 +81,10 @@ public class Detector : MonoBehaviour
                     .Select(box => {
                         // a IA gera caixas com coords 0-640. Queremos caixas 16:9
                         Rect rect = box.rect;
-                        rect.xMin = box.rect.xMin.Remap(new Vector2(0, 640), new Vector2(0, 1280));
+                        rect.xMin = box.rect.xMin.Remap(new Vector2(0, 640), new Vector2(0, 1280)) /*+ 1280*0.5f*/;
                         rect.xMax = box.rect.xMax.Remap(new Vector2(0, 640), new Vector2(0, 1280));
-                        rect.yMin = box.rect.yMin.Remap(new Vector2(0, 640), new Vector2(0, 720));
-                        rect.yMax = box.rect.yMax.Remap(new Vector2(0, 640), new Vector2(0, 720));
+                        rect.yMin = box.rect.yMax.Remap(new Vector2(640, 0), new Vector2(0, 720));
+                        rect.yMax = box.rect.yMin.Remap(new Vector2(640, 0), new Vector2(0, 720));
                         return new ResultBox(rect, box.score, box.bestClassIndex);
                     })
                     .ToList();
@@ -101,23 +101,12 @@ public class Detector : MonoBehaviour
         var firstInput = model.inputs[0];
         int height = firstInput.shape[5];
         int width = firstInput.shape[6];
-
-        TextureProvider provider;
-        switch (textureProviderType)
-        {
-            case TextureProviderType.ProviderType.WebCam:
-                provider = new WebCamTextureProvider(textureProvider as WebCamTextureProvider, width, height);
-                break;
-
-            case TextureProviderType.ProviderType.Video:
-                provider = new VideoTextureProvider(textureProvider as VideoTextureProvider, width, height);
-                break;
-            case TextureProviderType.ProviderType.Camera:
-                provider = new CameraTextureProvider(textureProvider as CameraTextureProvider, width, height);
-                break;
-            default:
-                throw new InvalidEnumArgumentException();
-        }
+        TextureProvider provider = textureProviderType switch {
+            TextureProviderType.ProviderType.WebCam => new WebCamTextureProvider(textureProvider as WebCamTextureProvider, width, height),
+            TextureProviderType.ProviderType.Video => new VideoTextureProvider(textureProvider as VideoTextureProvider, width, height),
+            TextureProviderType.ProviderType.Camera => new CameraTextureProvider(textureProvider as CameraTextureProvider, width, height),
+            _ => throw new InvalidEnumArgumentException(),
+        };
         return provider;
     }
 

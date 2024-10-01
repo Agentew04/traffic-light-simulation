@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Barracuda;
+using Unity.Collections;
 using UnityEngine;
 
 public class DelayedAIExecution : MonoBehaviour
@@ -10,6 +11,10 @@ public class DelayedAIExecution : MonoBehaviour
     [Header("Configuracoes")]
     [SerializeField, Tooltip("Modelo de IA que sera executado.")]
     private NNModel model;
+
+    [SerializeField, Tooltip("Quanto esperar entre execucoes")]
+    [Range(0.1f, 5f)]
+    private float delay = 1f;
 
     private NNHandler nn;
     private Texture2D currentTexture;
@@ -46,7 +51,7 @@ public class DelayedAIExecution : MonoBehaviour
 
         var output = nn.worker.Execute(inputTensor).PeekOutput();
         //yield return new WaitForCompletion(output);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delay);
         inputTensor.tensorOnDevice.Dispose();
         var outs = PeekOutputs().ToArray();
         Tensor boxesOutput = outs[0];

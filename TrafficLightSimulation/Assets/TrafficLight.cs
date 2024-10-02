@@ -20,6 +20,15 @@ public class TrafficLight : MonoBehaviour
     [Range(0, 5)]
     private float yellowDelay;
 
+    public enum LightState
+    {
+        Red,
+        Yellow,
+        Green
+    }
+
+    public LightState lightState;
+
     public bool IsOpen { get; private set; } = false;
 
     private void Start() {
@@ -49,6 +58,7 @@ public class TrafficLight : MonoBehaviour
         yellowLight.material.SetInt("_IsPowered", 0);
         greenLight.material.SetInt("_IsPowered", 1);
         IsOpen = true;
+        lightState = LightState.Green;
         OnOpen?.Invoke();
     }
 
@@ -60,6 +70,8 @@ public class TrafficLight : MonoBehaviour
         redLight.material.SetInt("_IsPowered", 0);
         yellowLight.material.SetInt("_IsPowered", 1);
         greenLight.material.SetInt("_IsPowered", 0);
+        IsOpen = false;
+        lightState = LightState.Yellow;
         Invoke(nameof(Close), yellowDelay);
     }
 
@@ -70,6 +82,8 @@ public class TrafficLight : MonoBehaviour
         redLight.material.SetInt("_IsPowered", 1);
         yellowLight.material.SetInt("_IsPowered", 0);
         greenLight.material.SetInt("_IsPowered", 0);
+        IsOpen = false;
+        lightState = LightState.Red;
         OnClose?.Invoke();
     }
 

@@ -29,9 +29,12 @@ public class TrafficLight : MonoBehaviour
 
     public LightState lightState;
 
-    public bool IsOpen { get; private set; } = false;
+    public bool IsOpen = false;
 
-    private void Start() {
+    public float openTime; // Variável para armazenar o tempo de abertura
+
+    private void Start()
+    {
         redLight.material = lightMaterial;
         redLight.material.EnableKeyword("_LIGHT_RED");
         redLight.material.DisableKeyword("_LIGHT_YELLOW");
@@ -53,12 +56,14 @@ public class TrafficLight : MonoBehaviour
     /// <summary>
     /// Abre imediatamente o sinal.
     /// </summary>
-    public void Open() {
+    public void Open()
+    {
         redLight.material.SetInt("_IsPowered", 0);
         yellowLight.material.SetInt("_IsPowered", 0);
         greenLight.material.SetInt("_IsPowered", 1);
         IsOpen = true;
         lightState = LightState.Green;
+        openTime = Time.time; // Registra o tempo de abertura
         OnOpen?.Invoke();
     }
 
@@ -66,11 +71,13 @@ public class TrafficLight : MonoBehaviour
     /// Sinaliza que vai fechar. Invoca o evento
     /// <see cref="OnClose"/> quando fechar.
     /// </summary>
-    public void StartClosing() {
+    public void StartClosing()
+    {
         redLight.material.SetInt("_IsPowered", 0);
         yellowLight.material.SetInt("_IsPowered", 1);
         greenLight.material.SetInt("_IsPowered", 0);
         IsOpen = false;
+        openTime = 0;
         lightState = LightState.Yellow;
         Invoke(nameof(Close), yellowDelay);
     }
@@ -78,11 +85,13 @@ public class TrafficLight : MonoBehaviour
     /// <summary>
     /// Fecha o sinal imediatamente
     /// </summary>
-    public void Close() {
+    public void Close()
+    {
         redLight.material.SetInt("_IsPowered", 1);
         yellowLight.material.SetInt("_IsPowered", 0);
         greenLight.material.SetInt("_IsPowered", 0);
         IsOpen = false;
+        openTime = 0;
         lightState = LightState.Red;
         OnClose?.Invoke();
     }
@@ -99,5 +108,4 @@ public class TrafficLight : MonoBehaviour
 
     [SerializeField, ButtonInvoke(nameof(Close))]
     private bool close;
-
 }

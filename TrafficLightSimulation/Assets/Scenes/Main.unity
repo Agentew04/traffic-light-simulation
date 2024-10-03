@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 180384227}
   - component: {fileID: 180384229}
   m_Layer: 0
-  m_Name: poste1 (1)
+  m_Name: poste 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -572,6 +572,9 @@ MonoBehaviour:
   greenLight: {fileID: 159443955}
   lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
   yellowDelay: 1
+  lightState: 0
+  IsOpen: 0
+  openTime: 0
   open: 0
   startclose: 0
   close: 0
@@ -1411,7 +1414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 418997837}
-  inputTexture: {fileID: 8600000, guid: 87c02810b06cdaf439102cea4ba1b117, type: 2}
+  inputTexture: {fileID: 8600000, guid: 12350eb8785c53a44b0fdc53c572fea6, type: 2}
   computeShader: {fileID: 7200000, guid: 6f0820b7893c463479b908d887c35e15, type: 3}
   destinationImage: {fileID: 1886911610}
   boxColor: {r: 1, g: 0, b: 0, a: 1}
@@ -2251,7 +2254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModelFile: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
   ImageUI: {fileID: 1852159475}
-  MinBoxConfidence: 0.3
+  MinBoxConfidence: 0.587
   textureProviderType: 2
   textureProvider:
     rid: 9165834185736454232
@@ -2897,7 +2900,7 @@ MonoBehaviour:
     - rid: 9165834185736454240
       type: {class: CameraTextureProvider, ns: Assets.Scripts.TextureProviders, asm: Assembly-CSharp}
       data:
-        renderTexture: {fileID: 8600000, guid: 12350eb8785c53a44b0fdc53c572fea6, type: 2}
+        renderTexture: {fileID: 8600000, guid: 87c02810b06cdaf439102cea4ba1b117, type: 2}
 --- !u!4 &805181314
 Transform:
   m_ObjectHideFlags: 0
@@ -2926,7 +2929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 805181313}
-  inputTexture: {fileID: 8600000, guid: 12350eb8785c53a44b0fdc53c572fea6, type: 2}
+  inputTexture: {fileID: 8600000, guid: 87c02810b06cdaf439102cea4ba1b117, type: 2}
   computeShader: {fileID: 7200000, guid: 6f0820b7893c463479b908d887c35e15, type: 3}
   destinationImage: {fileID: 868042806}
   boxColor: {r: 0, g: 1, b: 0.027116776, a: 1}
@@ -4824,7 +4827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModelFile: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
   ImageUI: {fileID: 824714149}
-  MinBoxConfidence: 0.3
+  MinBoxConfidence: 0.443
   textureProviderType: 2
   textureProvider:
     rid: 9165834185736454240
@@ -4965,7 +4968,7 @@ GameObject:
   - component: {fileID: 1702096370}
   - component: {fileID: 1702096372}
   m_Layer: 0
-  m_Name: poste1 (2)
+  m_Name: poste 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5057,6 +5060,9 @@ MonoBehaviour:
   greenLight: {fileID: 1055984720}
   lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
   yellowDelay: 1
+  lightState: 0
+  IsOpen: 0
+  openTime: 0
   open: 0
   startclose: 0
   close: 0
@@ -6345,7 +6351,7 @@ GameObject:
   - component: {fileID: 2068830047}
   - component: {fileID: 2068830049}
   m_Layer: 0
-  m_Name: poste1 (3)
+  m_Name: poste 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6437,6 +6443,9 @@ MonoBehaviour:
   greenLight: {fileID: 1828538074}
   lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
   yellowDelay: 1
+  lightState: 0
+  IsOpen: 0
+  openTime: 0
   open: 0
   startclose: 0
   close: 0
@@ -6640,6 +6649,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075482234}
   m_CullTransparentMesh: 1
+--- !u!1 &2087147641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2087147642}
+  - component: {fileID: 2087147643}
+  m_Layer: 0
+  m_Name: controlador
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2087147642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087147641}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 543450653395366257}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2087147643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087147641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12087767b7981bf4ebeabbd5b5b7d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trafficLights:
+  - {fileID: 9205128033383149063}
+  - {fileID: 180384229}
+  - {fileID: 1702096372}
+  - {fileID: 2068830049}
+  detectors:
+  - {fileID: 698552256}
+  - {fileID: 805181313}
+  - {fileID: 1613081400}
+  - {fileID: 418997837}
+  carCount: 
 --- !u!1 &2109639547
 GameObject:
   m_ObjectHideFlags: 0
@@ -6868,6 +6932,7 @@ Transform:
   - {fileID: 1702096369}
   - {fileID: 2068830046}
   - {fileID: 313232662}
+  - {fileID: 2087147642}
   m_Father: {fileID: 552402251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &746735229969234622
@@ -6933,7 +6998,7 @@ GameObject:
   - component: {fileID: 9205128033383149062}
   - component: {fileID: 9205128033383149063}
   m_Layer: 0
-  m_Name: poste1
+  m_Name: poste 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8128,6 +8193,9 @@ MonoBehaviour:
   greenLight: {fileID: 2854422343969258562}
   lightMaterial: {fileID: 2100000, guid: 3ce9ae5ba99d4614a8549caf702e898b, type: 2}
   yellowDelay: 1
+  lightState: 0
+  IsOpen: 0
+  openTime: 0
   open: 0
   startclose: 0
   close: 0

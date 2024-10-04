@@ -7,23 +7,38 @@ using UnityEngine.UIElements;
 
 class TextureTools
 {
+    public static void ScaleTexture(Texture input, ref Texture2D output, int desiredWidth, int desiredHeight) {
+        // Ensure the output texture matches the desired dimensions
+        if (output == null || output.width != desiredWidth || output.height != desiredHeight) {
+            output = new Texture2D(desiredWidth, desiredHeight, TextureFormat.RGBA32, false);
+        }
+
+        // Create a temporary RenderTexture with the desired dimensions
+        RenderTexture rt = RenderTexture.GetTemporary(desiredWidth, desiredHeight);
+
+        // Set the active RenderTexture and perform the scaling
+        Graphics.Blit(input, rt);
+
+        // Read the RenderTexture into the output Texture2D
+        RenderTexture.active = rt;
+        output.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
+        output.Apply();
+
+        // Reset the active RenderTexture and release the temporary one
+        RenderTexture.active = null;
+        RenderTexture.ReleaseTemporary(rt);
+
+    }
+
     public static Texture2D ResizeAndCropToCenter(Texture texture, ref Texture2D result, int width, int height)
     {
-        Debug.Log("resizing 2");
         float widthRatio = width / (float)texture.width;
-        Debug.Log("resizing 3");
         float heightRatio = height / (float)texture.height;
-        Debug.Log("resizing 4");
         float ratio = widthRatio > heightRatio ? widthRatio : heightRatio;
-        Debug.Log("resizing 5");
 
         Vector2Int renderTexturetSize = new((int)(texture.width * ratio), (int)(texture.height * ratio));
-        Debug.Log("getting temp");
         RenderTexture renderTexture = RenderTexture.GetTemporary(renderTexturetSize.x, renderTexturetSize.y);
-        Debug.Log("got temp");
-        Debug.Log("blitting");
         Graphics.Blit(texture, renderTexture);
-        Debug.Log("blitted");
         
         RenderTexture previousRenderTexture = RenderTexture.active;
         RenderTexture.active = renderTexture;

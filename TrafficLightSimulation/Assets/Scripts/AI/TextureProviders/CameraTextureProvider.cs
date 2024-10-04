@@ -10,6 +10,8 @@ namespace Assets.Scripts.TextureProviders {
         [SerializeField]
         private RenderTexture renderTexture;
 
+        private Texture2D outputTexture;
+
         public CameraTextureProvider(int width, int height, TextureFormat format = TextureFormat.RGB24) : base(width, height, format) {
             InputTexture = renderTexture;
         }
@@ -27,6 +29,11 @@ namespace Assets.Scripts.TextureProviders {
 
         public override void Stop() {
         }
+
+        //public override Texture2D GetTexture() {
+        //    TextureTools.ScaleTexture(renderTexture, ref outputTexture, 640, 640);
+        //    return outputTexture;
+        //}
 
         public override TextureProviderType.ProviderType TypeEnum() {
             return TextureProviderType.ProviderType.Camera;

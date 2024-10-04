@@ -1,0 +1,48 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+struct Box
+{
+    float x1, y1; // Top-left corner
+    float x2, y2; // Bottom-right corner
+    float lineWidth; // Line width for the box
+};
+
+StructuredBuffer<Box> Boxes;
+
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Input;
+
+RWTexture2D<float4> Output;
+
+int boxCount;
+float4 boxColor;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    uint x = id.x;
+    uint y = id.y;
+    bool achou = false;
+    for (int i = 0; i < boxCount; i++)
+    {
+        // Fetch the box data
+        Box box = Boxes[i];
+
+        // Check if the pixel is on the border of the box
+        if ((x >= box.x1 && x <= box.x2 && y >= box.y1 && y <= box.y2) &&
+            ((x <= box.x1 + box.lineWidth || x >= box.x2 - box.lineWidth) ||
+             (y <= box.y1 + box.lineWidth || y >= box.y2 - box.lineWidth)))
+        {
+            // Set the color for the pixel on the box border (example: white)
+            Output[id.xy] = boxColor;
+            achou = true;
+        }
+    }
+    if (!achou)
+    {
+        Output[id.xy] = Input[id.xy];
+    }
+}

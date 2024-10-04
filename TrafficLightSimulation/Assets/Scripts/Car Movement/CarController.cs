@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    public float acceleration = 500f;  // Força de aceleração
-    public float maxSpeed = 50f;       // Velocidade máxima
+    public float acceleration = 400f;  // Força de aceleração
+    public float maxSpeed = 40f;       // Velocidade máxima
 
     private Rigidbody rb;              // Componente Rigidbody
 

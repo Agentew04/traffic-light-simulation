@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f277876abcf7fd488ba6017495ce2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  model: {fileID: 5022602860645237092, guid: 258954504e98bce41ba12f162d2db859, type: 3}
   delay: 0.3
 --- !u!114 &418997837
 MonoBehaviour:
@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339c4b6bb28288140952235c57b0905b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModelFile: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  ModelFile: {fileID: 5022602860645237092, guid: 258954504e98bce41ba12f162d2db859, type: 3}
   ImageUI: {fileID: 1886911610}
   MinBoxConfidence: 0.3
   textureProviderType: 2
@@ -2974,7 +2974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f277876abcf7fd488ba6017495ce2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  model: {fileID: 5022602860645237092, guid: ce5685f667439cc418112d4cbf16b8e1, type: 3}
   delay: 0.3
 --- !u!114 &805181313
 MonoBehaviour:
@@ -2988,7 +2988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339c4b6bb28288140952235c57b0905b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModelFile: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  ModelFile: {fileID: 5022602860645237092, guid: ce5685f667439cc418112d4cbf16b8e1, type: 3}
   ImageUI: {fileID: 868042806}
   MinBoxConfidence: 0.3
   textureProviderType: 2
@@ -5107,7 +5107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f277876abcf7fd488ba6017495ce2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  model: {fileID: 5022602860645237092, guid: 5cf824226e3a82649b85ed97962a271f, type: 3}
   delay: 0.3
 --- !u!114 &1613081400
 MonoBehaviour:
@@ -5121,7 +5121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339c4b6bb28288140952235c57b0905b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModelFile: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
+  ModelFile: {fileID: 5022602860645237092, guid: 5cf824226e3a82649b85ed97962a271f, type: 3}
   ImageUI: {fileID: 824714149}
   MinBoxConfidence: 0.443
   textureProviderType: 2

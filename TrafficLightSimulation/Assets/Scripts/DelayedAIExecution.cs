@@ -28,9 +28,11 @@ public class DelayedAIExecution : MonoBehaviour
         outputReader ??= new();
     }
 
-    private void OnDisable() {
-        nn.Dispose();
+    private void OnDisable()
+    {
+        nn?.Dispose();
     }
+
 
     public void StartExecution(Texture2D texture) {
         if (isJobRunning) {

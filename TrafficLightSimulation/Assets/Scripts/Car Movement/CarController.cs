@@ -2,22 +2,27 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    public float acceleration = 400f;      // Força de aceleração
-    public float maxSpeed = 40f;           // Velocidade máxima
-    public float deceleration = 1000f;      // Força de desaceleração
-    public TrafficLight trafficLight;      // Referência ao script TrafficLight
+    public enum Side { Top, Right, Bottom, Left } // Definir os 4 lados da encruzilhada
+    public Side side;                         // O lado em que o carro está
+    public float acceleration = 400f;          // Força de aceleração (valor padrão)
+    public float maxSpeed = 40f;              // Velocidade máxima
+    public float deceleration = 1000f;        // Força de desaceleração
+    public TrafficLight trafficLight;         // Referência ao semáforo específico do lado
 
-    private Rigidbody rb;                  // Componente Rigidbody
+    private Rigidbody rb;                     // Componente Rigidbody
 
     void Start()
     {
         // Obtém o Rigidbody do carro
         rb = GetComponent<Rigidbody>();
+
+        // Ajusta a aceleração de acordo com o lado
+        AdjustAcceleration();
     }
 
     void Update()
     {
-        // Verifica se o sinal está aberto (verde)
+        // Verifica se o sinal está aberto (verde) para o lado correto
         if (trafficLight != null && trafficLight.IsOpen)
         {
             // Verifica se a velocidade do carro está abaixo da velocidade máxima
@@ -42,6 +47,20 @@ public class CarController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                 }
             }
+        }
+    }
+
+    // Ajusta a aceleração com base no lado
+    void AdjustAcceleration()
+    {
+        // A aceleração será negativa para Bottom e Left, e positiva para Top e Right
+        if (side == Side.Bottom || side == Side.Left)
+        {
+            acceleration = -400f; // Aceleração negativa para os lados Bottom e Left
+        }
+        else if (side == Side.Top || side == Side.Right)
+        {
+            acceleration = 400f;  // Aceleração positiva para os lados Top e Right
         }
     }
 }

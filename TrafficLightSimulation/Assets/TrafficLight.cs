@@ -31,7 +31,7 @@ public class TrafficLight : MonoBehaviour
 
     public bool IsOpen = false;
 
-    public float openTime; // Variável para armazenar o tempo de abertura
+    public float openTime; // Variï¿½vel para armazenar o tempo de abertura
 
     private void Start()
     {

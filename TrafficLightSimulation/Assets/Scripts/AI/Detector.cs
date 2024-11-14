@@ -119,10 +119,11 @@ public class Detector : MonoBehaviour
 
     void OnDisable()
     {
-        cts.Cancel();
-        nn.Dispose();
-        textureProvider.Stop();
+        cts?.Cancel();
+        nn?.Dispose();
+        textureProvider?.Stop();
     }
+
 
     protected void DrawResults(IEnumerable<ResultBox> results, Texture2D img)
     {

@@ -32,7 +32,7 @@ namespace Assets.Scripts.TextureProviders
         {
             return TextureTools.ResizeAndCropToCenter(InputTexture, ref ResultTexture, ResultTexture.width, ResultTexture.height);
             //TextureTools.ScaleTexture(InputTexture, ref ResultTexture, ResultTexture.width, ResultTexture.height);
-            return ResultTexture;
+            //return ResultTexture;
         }
 
         public abstract TextureProviderType.ProviderType TypeEnum();

@@ -34,35 +34,36 @@ public class CarSpawner : MonoBehaviour
 
     void TrySpawnCar()
     {
-        // Escolher aleatoriamente um lado para spawnar o carro
         int spawnSide = Random.Range(0, spawnPoints.Length);
+        Debug.Log($"Lado selecionado para spawn: {spawnSide} ({((CarController.Side)spawnSide)})");
 
-        // Verifica se ainda há espaço para mais carros nesse lado
         if (carsOnSide[spawnSide] < maxCarsPerSide)
         {
-            // Escolher aleatoriamente um prefab de carro
             GameObject selectedCarPrefab = carPrefabs[Random.Range(0, carPrefabs.Length)];
 
-            // Instancia o carro no lado escolhido
-            GameObject car = Instantiate(selectedCarPrefab, spawnPoints[spawnSide].position, spawnPoints[spawnSide].rotation);
+            GameObject car = Instantiate(
+                selectedCarPrefab,
+                spawnPoints[spawnSide].position,
+                spawnPoints[spawnSide].rotation
+            );
 
-            // Atribui o semáforo correto ao carro com base no lado
             if (car.TryGetComponent<CarController>(out var carController))
             {
-                carController.side = (CarController.Side)spawnSide; // Atribui o lado ao carro
-                carController.trafficLight = trafficLights[spawnSide]; // Atribui o semáforo correto
+                carController.side = (CarController.Side)spawnSide;
+                carController.trafficLight = trafficLights[spawnSide];
+                carController.AdjustAcceleration(); // Ajusta a aceleração no momento do spawn
             }
 
             carsOnSide[spawnSide]++;
-
-            // Registra o número de carros no lado
-            Debug.Log("Carro spawnado no lado " + spawnSide + ": " + selectedCarPrefab.name);
+            Debug.Log($"Carro spawnado no lado {spawnSide}: {selectedCarPrefab.name}, rotação: {spawnPoints[spawnSide].rotation.eulerAngles}");
         }
         else
         {
-            Debug.Log("Máximo de carros no lado " + spawnSide);
+            Debug.Log($"Máximo de carros atingido no lado {spawnSide}");
         }
     }
+
+
 
     // Função para ser chamada quando um carro sai da área, removendo o contador de carros no lado
     public void OnCarExit(int sideIndex)

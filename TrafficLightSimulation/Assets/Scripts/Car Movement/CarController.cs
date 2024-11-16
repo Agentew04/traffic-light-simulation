@@ -10,34 +10,23 @@ public class CarController : MonoBehaviour
     public TrafficLight trafficLight;         // Referência ao semáforo específico do lado
 
     private Rigidbody rb;                     // Componente Rigidbody
+    private bool isInStopZone = false;        // Indica se o carro está na zona de parada
+    private TrafficLight stopZoneLight;       // Semáforo da zona de parada
 
     void Start()
     {
         // Obtém o Rigidbody do carro
         rb = GetComponent<Rigidbody>();
-
-        // Ajusta a aceleração de acordo com o lado
-        AdjustAcceleration();
     }
 
     void Update()
     {
-        // Verifica se o sinal está aberto (verde) para o lado correto
-        if (trafficLight != null && trafficLight.IsOpen)
+        // Verifica se o carro está na zona de parada e o semáforo está vermelho ou amarelo
+        if (isInStopZone && stopZoneLight != null && !stopZoneLight.IsOpen)
         {
-            // Verifica se a velocidade do carro está abaixo da velocidade máxima
-            if (rb.velocity.magnitude < maxSpeed)
-            {
-                // Aplica força contínua para mover o carro para frente
-                rb.AddForce(acceleration * Time.deltaTime * transform.forward);
-            }
-        }
-        else
-        {
-            // Se o sinal estiver amarelo ou vermelho e o carro ainda estiver em movimento
+            // Aplica desaceleração
             if (rb.velocity.magnitude > 0)
             {
-                // Aplica uma força de desaceleração oposta à direção do movimento
                 Vector3 decelerationForce = deceleration * Time.deltaTime * -rb.velocity.normalized;
                 rb.AddForce(decelerationForce);
 
@@ -48,19 +37,34 @@ public class CarController : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            // O carro se move até a zona de parada, mesmo que o semáforo esteja vermelho
+            if (rb.velocity.magnitude < maxSpeed)
+            {
+                rb.AddForce(acceleration * Time.deltaTime * transform.forward);
+            }
+        }
     }
 
-    // Ajusta a aceleração com base no lado
-    void AdjustAcceleration()
+    // Configura o estado da zona de parada
+    public void SetStopZone(bool inZone, TrafficLight light)
     {
-        // A aceleração será negativa para Bottom e Left, e positiva para Top e Right
+        isInStopZone = inZone;
+        stopZoneLight = light;
+    }
+
+
+// Ajusta a aceleração com base no lado
+public void AdjustAcceleration()
+    {
         if (side == Side.Bottom || side == Side.Left)
         {
-            acceleration = -400f; // Aceleração negativa para os lados Bottom e Left
+            acceleration = 400f; // Configuração para Bottom e Left
         }
         else if (side == Side.Top || side == Side.Right)
         {
-            acceleration = 400f;  // Aceleração positiva para os lados Top e Right
+            acceleration = 400f; // Configuração para Top e Right
         }
     }
 }

@@ -10,15 +10,22 @@ public class CarUnspawner : MonoBehaviour
         if (other.CompareTag("Car") || other.CompareTag("Gol"))
         {
             Debug.Log("Carro saiu da área: " + other.name);
-
+            bool parentDestroyed = false;
             // Notifica o CarSpawner que o carro saiu
-            if (other.TryGetComponent<CarController>(out CarController carController))
+            if (other.TryGetComponent(out CarController carController))
             {
                 carSpawner.OnCarExit((int)carController.side);
+                if(carController.Parent != carController.gameObject) {
+                    // eh o golzinho com pivo!
+                    Destroy(carController.Parent);
+                    parentDestroyed = true;
+                }
             }
 
             // Destroi o carro quando ele sai da área
-            Destroy(other.gameObject);
+            if (!parentDestroyed) {
+                Destroy(other.gameObject);
+            }
         }
     }
 }

@@ -168,3 +168,4 @@ MonoBehaviour:
   maxSpeed: 40
   deceleration: 1000
   trafficLight: {fileID: 0}
+  parent: {fileID: 5972004782799796859}

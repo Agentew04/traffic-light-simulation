@@ -57,6 +57,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8770377771473382617, guid: 15163d3ce5df0524f9fab44f60715544, type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 1153510395981208704}
+    - target: {fileID: 8770377771473382617, guid: 15163d3ce5df0524f9fab44f60715544, type: 3}
       propertyPath: acceleration
       value: -400
       objectReference: {fileID: 0}
@@ -137,5 +141,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.8431978, y: 1.9288355, z: 3.7535682}
+  m_Center: {x: -0.000000087977334, y: 0.4644175, z: -0.40842405}

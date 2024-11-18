@@ -13,6 +13,10 @@ public class CarController : MonoBehaviour
     private bool isInStopZone = false;        // Indica se o carro está na zona de parada
     private TrafficLight stopZoneLight;       // Semáforo da zona de parada
 
+    [SerializeField, Tooltip("Usado para deletar pivo no gol. Nos outros eh o proprio obj")]
+    private GameObject parent;
+    public GameObject Parent => parent;
+
     void Start()
     {
         // Obtém o Rigidbody do carro

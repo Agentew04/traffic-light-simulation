@@ -51,7 +51,6 @@ public class CarSpawner : MonoBehaviour
             {
                 carController.side = (CarController.Side)spawnSide;
                 carController.trafficLight = trafficLights[spawnSide];
-                carController.AdjustAcceleration(); // Ajusta a aceleração no momento do spawn
             }
 
             carsOnSide[spawnSide]++;

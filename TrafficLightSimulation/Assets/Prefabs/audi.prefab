@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
+      propertyPath: m_TagString
+      value: Car
+      objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -89,9 +93,6 @@ PrefabInstance:
       addedObject: {fileID: 1232666663154788731}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7664562703606780551}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5773274982632727819}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
       insertIndex: -1
@@ -99,6 +100,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5894214124990613470}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1209754100316427358}
   m_SourcePrefab: {fileID: 100100000, guid: 5d61729cd92b1b0488a8737ac02fd1cf, type: 3}
 --- !u!1 &5972004782799796859 stripped
 GameObject:
@@ -167,23 +171,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &7664562703606780551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5972004782799796859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625d8a44c879c0c439d25d884d4f9160, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  side: 0
-  acceleration: 400
-  maxSpeed: 40
-  deceleration: 1000
-  trafficLight: {fileID: 0}
 --- !u!114 &5773274982632727819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,3 +242,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1209754100316427358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972004782799796859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625d8a44c879c0c439d25d884d4f9160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: 0
+  acceleration: 300
+  maxSpeed: 40
+  deceleration: 1000
+  trafficLight: {fileID: 0}

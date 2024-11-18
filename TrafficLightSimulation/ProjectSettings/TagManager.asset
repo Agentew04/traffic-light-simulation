@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Car
   - StopZone
+  - Gol
   layers:
   - Default
   - TransparentFX

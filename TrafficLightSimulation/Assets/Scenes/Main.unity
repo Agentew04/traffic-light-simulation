@@ -1496,7 +1496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   primaryStopZone: {fileID: 766527874}
-  trafficLight: {fileID: 9205128033383149063}
+  trafficLight: {fileID: 1702096372}
 --- !u!1 &447972668
 GameObject:
   m_ObjectHideFlags: 0
@@ -3014,7 +3014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4bbdc8e1b1b5f47b71f592d179ec85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trafficLight: {fileID: 9205128033383149063}
+  trafficLight: {fileID: 1702096372}
 --- !u!1 &773248886
 GameObject:
   m_ObjectHideFlags: 0
@@ -4273,7 +4273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   primaryStopZone: {fileID: 1247576289}
-  trafficLight: {fileID: 180384229}
+  trafficLight: {fileID: 2068830049}
 --- !u!1 &1139954354
 GameObject:
   m_ObjectHideFlags: 0
@@ -4755,7 +4755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4bbdc8e1b1b5f47b71f592d179ec85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trafficLight: {fileID: 180384229}
+  trafficLight: {fileID: 2068830049}
 --- !u!1 &1255298690
 GameObject:
   m_ObjectHideFlags: 0
@@ -9200,7 +9200,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2997042e73b50d84f8d5848441e62eee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

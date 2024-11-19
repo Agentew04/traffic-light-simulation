@@ -16,6 +16,12 @@ public class DelayedAIExecution : MonoBehaviour
     [Range(0.1f, 5f)]
     private float delay = 1f;
 
+    [SerializeField]
+    private int amountOfFetchs = 4;
+
+    [SerializeField]
+    private int fetchOffset = 0;
+
     private NNHandler nn;
     private Texture2D currentTexture;
     private bool isJobRunning = false;
@@ -54,6 +60,9 @@ public class DelayedAIExecution : MonoBehaviour
         var output = nn.worker.Execute(inputTensor).PeekOutput();
         //yield return new WaitForCompletion(output);
         yield return new WaitForSeconds(delay);
+        while(Time.frameCount % amountOfFetchs != fetchOffset) {
+            yield return null;
+        }
         inputTensor.tensorOnDevice.Dispose();
         var outs = PeekOutputs().ToArray();
         Tensor boxesOutput = outs[0];

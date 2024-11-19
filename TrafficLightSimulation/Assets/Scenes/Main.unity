@@ -1308,7 +1308,7 @@ MonoBehaviour:
   - {fileID: 2068830049}
   maxCarsPerSide: 2
   minSpawnTime: 3
-  maxSpawnTime: 8
+  maxSpawnTime: 3
 --- !u!4 &386012259
 Transform:
   m_ObjectHideFlags: 0
@@ -1560,6 +1560,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
   delay: 0.3
+  amountOfFetchs: 4
+  fetchOffset: 3
 --- !u!114 &418997837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2994,6 +2996,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
   delay: 0.3
+  amountOfFetchs: 4
+  fetchOffset: 0
 --- !u!114 &698552259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3965,6 +3969,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
   delay: 0.3
+  amountOfFetchs: 4
+  fetchOffset: 1
 --- !u!114 &805181313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6431,6 +6437,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5022602860645237092, guid: 908c1cb7d5e21ae4b8fcd27f5604f86b, type: 3}
   delay: 0.3
+  amountOfFetchs: 4
+  fetchOffset: 2
 --- !u!114 &1613081400
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,9 +11,16 @@ public class CarSpawner : MonoBehaviour
     public float maxSpawnTime = 5f;          // Tempo máximo de spawn (em segundos)
 
     private int[] carsOnSide;                // Para armazenar o número de carros em cada lado
+    private float originalMinSpawnTime;      // Valor original de minSpawnTime
+    private float originalMaxSpawnTime;      // Valor original de maxSpawnTime
 
     void Start()
     {
+        // Armazena os valores originais
+        originalMinSpawnTime = minSpawnTime;
+        originalMaxSpawnTime = maxSpawnTime;
+
+
         // Inicializa o array com o número de carros em cada lado
         carsOnSide = new int[spawnPoints.Length];
         StartCoroutine(SpawnCars());
@@ -60,6 +67,14 @@ public class CarSpawner : MonoBehaviour
         {
             Debug.Log($"Máximo de carros atingido no lado {spawnSide}");
         }
+    }
+
+    // Atualiza os tempos de spawn com base no valor do Slider
+    public void UpdateSpawnRate(float sliderValue)
+    {
+        // Ajusta os tempos com base nos valores originais
+        minSpawnTime = originalMinSpawnTime * (1f / sliderValue);
+        maxSpawnTime = originalMaxSpawnTime * (1f / sliderValue);
     }
 
 

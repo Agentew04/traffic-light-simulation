@@ -65,9 +65,7 @@ public class BoxRenderer : MonoBehaviour
             boxBuffer.SetData(b);
         }
 
-        Debug.Log($"Drawing {b.Length} boxes. W/H({inputTexture.width}/{inputTexture.height})");
         foreach(var box in b) {
-            Debug.LogFormat($"Box: ({box.x1}; {box.y1}) ({box.x2}; {box.y2})");
         }
         int kernelHandle = computeShader.FindKernel("CSMain");
         computeShader.SetTexture(kernelHandle, "Input", inputTexture);

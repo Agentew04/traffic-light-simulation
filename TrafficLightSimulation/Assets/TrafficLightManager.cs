@@ -29,7 +29,6 @@ public class TrafficLightManager : MonoBehaviour
             queue.Add(trafficLight);
         }
 
-            // Chame o método para atualizar os semáforos periodicamente
             InvokeRepeating(nameof(UpdateTrafficLights), 0, 1.0f); // Atualiza a cada 1 segundo
     }
 
@@ -74,7 +73,6 @@ public class TrafficLightManager : MonoBehaviour
             OnLightChanged(trafficLight, trafficLight.lightState);
         }
 
-        // Ordena a fila de semáforos
         OrderTrafficLightsQueue();
     }
 
@@ -88,10 +86,8 @@ public class TrafficLightManager : MonoBehaviour
             trafficLightCarCount[trafficLights[i]] = carCount[i];
         }
 
-        // Ordena a fila com base na contagem de carros
         queue = trafficLightCarCount.OrderByDescending(t => t.Value).Select(t => t.Key).ToList();
 
-        // Garante que o semáforo atualmente aberto seja o último na fila
         var openTrafficLight = trafficLights.FirstOrDefault(t => t.IsOpen);
         if (openTrafficLight != null)
         {

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class TrafficLight : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class TrafficLight : MonoBehaviour
 
     public bool IsOpen = false;
 
-    public float openTime; // Variável para armazenar o tempo de abertura
+    public float openTime; // Variï¿½vel para armazenar o tempo de abertura
 
     private void Start()
     {
@@ -58,6 +59,13 @@ public class TrafficLight : MonoBehaviour
     /// </summary>
     public void Open()
     {
+        StartCoroutine(OpenWithDelay());
+    }
+
+    private IEnumerator OpenWithDelay()
+    {
+        yield return new WaitForSeconds(2.0f);
+
         redLight.material.SetInt("_IsPowered", 0);
         yellowLight.material.SetInt("_IsPowered", 0);
         greenLight.material.SetInt("_IsPowered", 1);

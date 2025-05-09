@@ -2,10 +2,20 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    public float acceleration = 400f;  // Força de aceleração
-    public float maxSpeed = 40f;       // Velocidade máxima
+    public enum Side { Top, Right, Bottom, Left } // Definir os 4 lados da encruzilhada
+    public Side side;                         // O lado em que o carro está
+    public float acceleration = 300f;          // Força de aceleração (valor padrão)
+    public float maxSpeed = 40f;              // Velocidade máxima
+    public float deceleration = 1000f;        // Força de desaceleração
+    public TrafficLight trafficLight;         // Referência ao semáforo específico do lado
 
-    private Rigidbody rb;              // Componente Rigidbody
+    private Rigidbody rb;                     // Componente Rigidbody
+    private bool isInStopZone = false;        // Indica se o carro está na zona de parada
+    private TrafficLight stopZoneLight;       // Semáforo da zona de parada
+
+    [SerializeField, Tooltip("Usado para deletar pivo no gol. Nos outros eh o proprio obj")]
+    private GameObject parent;
+    public GameObject Parent => parent;
 
     void Start()
     {
@@ -15,11 +25,41 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        // Verifica se a velocidade do carro está abaixo da velocidade máxima
-        if (rb.velocity.magnitude < maxSpeed)
+        // Verifica se o carro está na zona de parada e o semáforo está vermelho ou amarelo
+        if (isInStopZone && stopZoneLight != null && !stopZoneLight.IsOpen)
         {
-            // Aplica força contínua para mover o carro para frente
-            rb.AddForce(acceleration * Time.deltaTime * transform.forward);
+            // Aplica desaceleração
+            if (rb.velocity.magnitude > 0)
+            {
+                Vector3 decelerationForce = deceleration * Time.deltaTime * -rb.velocity.normalized;
+                rb.AddForce(decelerationForce);
+
+                // Impede que a velocidade se torne negativa
+                if (rb.velocity.magnitude < 0.1f)
+                {
+                    rb.velocity = Vector3.zero;
+                }
+            }
         }
+        else
+        {
+            // O carro se move até a zona de parada, mesmo que o semáforo esteja vermelho
+            if (rb.velocity.magnitude < maxSpeed)
+            {
+                rb.AddForce(acceleration * Time.deltaTime * transform.forward);
+            }
+        }
+    }
+
+    // Configura o estado da zona de parada
+    public void SetStopZone(bool inZone, TrafficLight light)
+    {
+        isInStopZone = inZone;
+        stopZoneLight = light;
+    }
+    // Método para alterar a aceleração do carro
+    public void SetAcceleration(float newAcceleration)
+    {
+        acceleration = newAcceleration;
     }
 }
